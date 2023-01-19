@@ -44,7 +44,6 @@ function NavBar() {
           <Box
             sx={{
               flexGrow: 1,
-              gap: "0.1%",
               display: {
                 xs: "none",
                 md: "flex",
