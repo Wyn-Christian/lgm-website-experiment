@@ -2,7 +2,7 @@ import NavBar from "./components/NavBar";
 import Home from "./pages/Home";
 import { Outlet } from "react-router-dom";
 
-function App() {
+function Root() {
   return (
     <div className="App">
       <NavBar />
@@ -11,4 +11,4 @@ function App() {
   );
 }
 
-export default App;
+export default Root;
