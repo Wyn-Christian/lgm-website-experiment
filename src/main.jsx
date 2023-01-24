@@ -10,11 +10,16 @@ import AboutUs from "./pages/AboutUs";
 import Packages, { loader as packagesLoader } from "./pages/Packages";
 import Galleries, { loader as galleriesLoader } from "./pages/Galleries";
 import Reviews, { loader as reviewsLoader } from "./pages/Reviews";
-import ContactUs, { loader as contactusLoader } from "./pages/ContactUs";
+import ContactUs, {
+  loader as contactusLoader,
+  action as contactusAction,
+} from "./pages/ContactUs";
 import Faqs from "./pages/Faqs";
 import PhotoGallery, {
   loader as photoGalleryLoader,
 } from "./pages/PhotoGallery";
+
+import { SnackbarProvider } from "notistack";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +60,7 @@ const router = createBrowserRouter([
             path: "/contact-us",
             element: <ContactUs />,
             loader: contactusLoader,
+            action: contactusAction,
           },
           {
             path: "/faqs",
@@ -70,7 +76,9 @@ ReactDOM.createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <CssBaseline />
     <ThemeContext>
-      <RouterProvider router={router} />
+      <SnackbarProvider maxSnack={3}>
+        <RouterProvider router={router} />
+      </SnackbarProvider>
     </ThemeContext>
   </React.StrictMode>
 );

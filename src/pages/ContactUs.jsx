@@ -9,8 +9,9 @@ import {
   Typography,
 } from "@mui/material";
 import axios from "axios";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, redirect } from "react-router-dom";
 import { Form } from "react-router-dom";
+import { useSnackbar } from "notistack";
 
 const baseUrl = "http://localhost:1337";
 
@@ -20,9 +21,22 @@ export async function loader() {
     .then((result) => result.data.data.attributes);
   return result;
 }
-export async function action() {}
+export async function action({ request }) {
+  const formData = await request.formData();
+  const contactForm = Object.fromEntries(formData);
+  await axios
+    .post("http://localhost:1337/api/contact-forms", {
+      data: contactForm,
+    })
+    .then((result) => {
+      console.log(result.data);
+    });
+  return redirect("/");
+}
 
 function ContactUs() {
+  const { enqueueSnackbar } = useSnackbar();
+
   const result = useLoaderData();
   return (
     <Container>
@@ -139,7 +153,27 @@ function ContactUs() {
             }}
             elevation={10}
           >
-            <Form style={{ width: "100%", margin: "0 0 20px" }}>
+            <Form
+              style={{ width: "100%", margin: "0 0 20px" }}
+              method="post"
+              action="/contact-us"
+              onSubmit={() => {
+                enqueueSnackbar(
+                  "Your form has been successfully submitted.",
+                  { variant: "success" }
+                );
+                enqueueSnackbar(
+                  "We'll get back to you in 1-5 business days.",
+                  {
+                    autoHideDuration: 8000,
+                    transitionDuration: {
+                      enter: 1000,
+                      exit: 500,
+                    },
+                  }
+                );
+              }}
+            >
               <Grid
                 container
                 rowSpacing={{ xs: 2, md: 3 }}
@@ -147,8 +181,9 @@ function ContactUs() {
               >
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    required
                     label="First Name"
-                    name="first-name"
+                    name="firstname"
                     sx={{
                       width: "100%",
                     }}
@@ -156,8 +191,9 @@ function ContactUs() {
                 </Grid>
                 <Grid item xs={12} sm={6}>
                   <TextField
+                    required
                     label="Last Name"
-                    name="last-name"
+                    name="lastname"
                     sx={{
                       width: "100%",
                     }}
@@ -166,6 +202,7 @@ function ContactUs() {
 
                 <Grid item xs={12}>
                   <TextField
+                    required
                     label="Email"
                     name="email"
                     type="email"
@@ -176,6 +213,7 @@ function ContactUs() {
                 </Grid>
                 <Grid item xs={12}>
                   <TextField
+                    required
                     label="Message"
                     name="message"
                     type="text"
@@ -194,6 +232,7 @@ function ContactUs() {
                 </Grid>
                 <Grid item xs={12}>
                   <Button
+                    type="submit"
                     variant="contained"
                     sx={{ width: "100%", padding: "10px 0" }}
                   >
