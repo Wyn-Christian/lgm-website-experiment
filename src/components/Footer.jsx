@@ -76,6 +76,7 @@ function Footer() {
 									<Typography sx={{ fontSize: "20px" }}>Address:</Typography>
 									<Typography sx={{ fontSize: "16px" }}>{result.address}</Typography>
 								</Box>
+								{/* This is a comment */}
 							</Box>
 						</Box>
 					</Box>
