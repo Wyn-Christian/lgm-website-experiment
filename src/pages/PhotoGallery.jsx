@@ -2,20 +2,21 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { useLoaderData } from "react-router-dom";
 
-import { Box, Container, Typography } from "@mui/material";
+import Box from "@mui/material/Box";
+import Container from "@mui/material/Container";
+import Typography from "@mui/material/Typography";
 import Modal from "@mui/material/Modal";
-import Button from "@mui/material/Button";
 import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import Paper from "@mui/material/Paper";
-
 import ImageGallery from "../components/ImageGallery";
 
-export async function loader() {
+export async function loader({ params }) {
   let result = await axios
-    .get("http://localhost:1337/api/review?populate=images")
+    .get(
+      `http://localhost:1337/api/galleries/${params.gallery_id}?populate=images`
+    )
     .then((result) => {
       let data = {
+        id: result.data.data.id,
         title: result.data.data.attributes.title,
         description: result.data.data.attributes.description,
         images: result.data.data.attributes.images.data,
@@ -25,12 +26,12 @@ export async function loader() {
   return result;
 }
 
-function Reviews() {
-  const baseUrl = "http://localhost:1337";
+function PhotoGallery() {
   const result = useLoaderData();
 
   const [open, setOpen] = useState(false);
   const [url, setUrl] = useState("");
+
   const handleOpen = (url) => {
     setOpen(true);
     setUrl(url);
@@ -46,14 +47,6 @@ function Reviews() {
         sx={{ m: "20px 0 10px" }}
       >
         {result.title}
-      </Typography>
-      <Typography
-        sx={{
-          m: "0 auto 10px",
-          textAlign: "center",
-        }}
-      >
-        {result.description}
       </Typography>
       <Box
         sx={{
@@ -92,8 +85,7 @@ function Reviews() {
             width: {
               xs: "100%",
               sm: "90%",
-              md: "70%",
-              lg: "50%",
+              md: "60%",
             },
           }}
         >
@@ -110,4 +102,4 @@ function Reviews() {
   );
 }
 
-export default Reviews;
+export default PhotoGallery;

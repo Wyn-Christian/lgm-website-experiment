@@ -1,21 +1,20 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import Root from "./Root";
-import "@fontsource/roboto/300.css";
-import "@fontsource/roboto/400.css";
-import "@fontsource/roboto/500.css";
-import "@fontsource/roboto/700.css";
 import { CssBaseline } from "@mui/material";
 import { ThemeContext } from "./contexts/theme";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import Root from "./routes/Root";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
 import Packages from "./pages/Packages";
-import Gallery from "./pages/Gallery";
-import Reviews from "./pages/Reviews";
+import Galleries, { loader as galleriesLoader } from "./pages/Galleries";
+import Reviews, { loader as reviewsLoader } from "./pages/Reviews";
 import ContactUs from "./pages/ContactUs";
 import Faqs from "./pages/Faqs";
+import PhotoGallery, {
+  loader as photoGalleryLoader,
+} from "./pages/PhotoGallery";
 
 const router = createBrowserRouter([
   {
@@ -23,30 +22,42 @@ const router = createBrowserRouter([
     element: <Root />,
     errorElement: <Error />,
     children: [
-      { path: "", element: <Home /> },
       {
-        path: "/about-us",
-        element: <AboutUs />,
-      },
-      {
-        path: "/packages",
-        element: <Packages />,
-      },
-      {
-        path: "/gallery",
-        element: <Gallery />,
-      },
-      {
-        path: "/reviews",
-        element: <Reviews />,
-      },
-      {
-        path: "/contact-us",
-        element: <ContactUs />,
-      },
-      {
-        path: "/faqs",
-        element: <Faqs />,
+        errorElement: <Error />,
+        children: [
+          { index: true, element: <Home /> },
+          {
+            path: "/about-us",
+            element: <AboutUs />,
+          },
+          {
+            path: "/packages",
+            element: <Packages />,
+          },
+          {
+            path: "/gallery",
+            element: <Galleries />,
+            loader: galleriesLoader,
+          },
+          {
+            path: "/gallery/:gallery_id",
+            element: <PhotoGallery />,
+            loader: photoGalleryLoader,
+          },
+          {
+            path: "/reviews",
+            element: <Reviews />,
+            loader: reviewsLoader,
+          },
+          {
+            path: "/contact-us",
+            element: <ContactUs />,
+          },
+          {
+            path: "/faqs",
+            element: <Faqs />,
+          },
+        ],
       },
     ],
   },
