@@ -86,7 +86,7 @@ function NavBar() {
             }}
           >
             {pages.map((p) => (
-              <MenuItem key={p.name} onClick={handleCloseNavMenu}>
+              <MenuItem key={p.title} onClick={handleCloseNavMenu}>
                 <Typography textAlign="center" variant="h6">
                   <LinkPage {...p} />
                 </Typography>
@@ -118,7 +118,7 @@ function NavBar() {
             }}
           >
             {pages.map((p) => (
-              <LinkPage {...p} key={p.name} />
+              <LinkPage {...p} key={p.title} />
             ))}
             {/* <LinkPage title="Home" to="/" />
             <LinkPage title="About Us" to="/about-us" />

@@ -1,7 +1,22 @@
+import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 import { Box, Container, Paper, Typography } from "@mui/material";
-import { Parallax, ParallaxLayer } from "@react-spring/parallax";
+const baseUrl = "http://localhost:1337";
 
-import useScrollTrigger from "@mui/material/useScrollTrigger";
+export async function loader() {
+  let result = await axios
+    .get("http://localhost:1337/api/package?populate=*,package.image")
+    .then((result) => {
+      let data = {
+        id: result.data.data.id,
+        title: result.data.data.attributes.title,
+        packages: result.data.data.attributes.package,
+      };
+      return data;
+    });
+  return result;
+}
+
 const packages = [
   "mahalina",
   "bighani",
@@ -11,10 +26,9 @@ const packages = [
   "amor",
 ];
 
-const Package = ({ i, p }) => {
+const Package = ({ item }) => {
   return (
     <Box
-      key={i}
       sx={{
         m: "0 0 100px",
       }}
@@ -26,13 +40,13 @@ const Package = ({ i, p }) => {
           m: "0 0 10px",
         }}
       >
-        {p.toUpperCase()}
+        {item.title.toUpperCase()}
       </Typography>
 
       <Paper sx={{ display: "flex" }} elevation={5}>
         <img
-          src={`/packages/${p}.jpg`}
-          alt={p}
+          src={`${baseUrl}${item.image.data.attributes.url}`}
+          alt={item.title}
           style={{ width: "100%", margin: "auto" }}
         />
       </Paper>
@@ -41,11 +55,13 @@ const Package = ({ i, p }) => {
 };
 
 function Packages() {
+  const result = useLoaderData();
+
   return (
     <Container>
       <Box sx={{ m: "0 0 30px" }}>
         <Typography variant="h1" textAlign="center" fontWeight="bold">
-          Wedding Packages
+          {result.title}
         </Typography>
         <Typography variant="h4" textAlign="center">
           NO VENUE
@@ -54,8 +70,8 @@ function Packages() {
           Terms & Condition Applied
         </Typography>
       </Box>
-      {packages.map((p, i) => (
-        <Package {...{ p, i }} />
+      {result.packages.map((item) => (
+        <Package item={item} key={item.id} />
       ))}
     </Container>
   );

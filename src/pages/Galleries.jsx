@@ -34,7 +34,6 @@ export async function loader() {
     };
     return data;
   });
-  console.log(filteredResult);
   return filteredResult;
 }
 

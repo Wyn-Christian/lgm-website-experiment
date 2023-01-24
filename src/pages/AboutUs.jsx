@@ -5,9 +5,12 @@ import {
   Typography,
   Grid,
   Avatar,
+  Skeleton,
 } from "@mui/material";
+import { useState } from "react";
 
 const Person = ({ id, name, url, position }) => {
+  const [loading, setloading] = useState(true);
   return (
     <Grid item xs={12} sm={6} md={4}>
       <Box
@@ -18,6 +21,9 @@ const Person = ({ id, name, url, position }) => {
           alignItems: "center",
         }}
       >
+        {loading && (
+          <Skeleton variant="circular" width={250} height={250} />
+        )}
         <Avatar
           alt="profile"
           src={url}
@@ -26,6 +32,9 @@ const Person = ({ id, name, url, position }) => {
             height: 250,
             boxShadow:
               "rgba(0, 0, 0, 0.4) 0px 2px 4px, rgba(0, 0, 0, 0.3) 0px 7px 13px -3px, rgba(0, 0, 0, 0.2) 0px -3px 0px inset",
+          }}
+          onLoad={() => {
+            setloading(false);
           }}
         />
         <Typography variant="h4">{name}</Typography>

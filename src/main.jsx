@@ -7,10 +7,10 @@ import Root from "./routes/Root";
 import Error from "./pages/Error";
 import Home from "./pages/Home";
 import AboutUs from "./pages/AboutUs";
-import Packages from "./pages/Packages";
+import Packages, { loader as packagesLoader } from "./pages/Packages";
 import Galleries, { loader as galleriesLoader } from "./pages/Galleries";
 import Reviews, { loader as reviewsLoader } from "./pages/Reviews";
-import ContactUs from "./pages/ContactUs";
+import ContactUs, { loader as contactusLoader } from "./pages/ContactUs";
 import Faqs from "./pages/Faqs";
 import PhotoGallery, {
   loader as photoGalleryLoader,
@@ -21,6 +21,7 @@ const router = createBrowserRouter([
     path: "/",
     element: <Root />,
     errorElement: <Error />,
+    loader: contactusLoader,
     children: [
       {
         errorElement: <Error />,
@@ -33,6 +34,7 @@ const router = createBrowserRouter([
           {
             path: "/packages",
             element: <Packages />,
+            loader: packagesLoader,
           },
           {
             path: "/gallery",
@@ -52,6 +54,7 @@ const router = createBrowserRouter([
           {
             path: "/contact-us",
             element: <ContactUs />,
+            loader: contactusLoader,
           },
           {
             path: "/faqs",

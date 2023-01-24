@@ -15,6 +15,7 @@ const Question = ({ children, summary, expanded, handleChange }) => {
       sx={{
         backgroundColor: theme.palette.primary.main,
         color: theme.palette.primary.contrastText,
+        margin: "6px 0",
       }}
       expanded={expanded}
       onChange={handleChange}

@@ -17,7 +17,7 @@ function Root() {
     <Box sx={{ backgroundColor: "#f0f0f0" }}>
       <NavBar />
       <ScrollRestoration />
-      <Box sx={{ minHeight: "100vh" }}>
+      <Box sx={{ minHeight: "70vh" }}>
         {navigation.state === "loading" && (
           <Backdrop
             sx={{

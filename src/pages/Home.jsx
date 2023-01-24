@@ -6,7 +6,6 @@ function Home() {
     opacity: 1,
     from: { opacity: 0 },
   });
-  const { scrollYProgress } = useScroll();
   const AnimatedTypography = animated(Typography);
   return (
     <>

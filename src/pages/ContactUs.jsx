@@ -2,13 +2,28 @@ import {
   Box,
   Button,
   Container,
+  Divider,
   Grid,
   Paper,
   TextField,
   Typography,
 } from "@mui/material";
+import axios from "axios";
+import { useLoaderData } from "react-router-dom";
+import { Form } from "react-router-dom";
+
+const baseUrl = "http://localhost:1337";
+
+export async function loader() {
+  let result = await axios
+    .get("http://localhost:1337/api/contact")
+    .then((result) => result.data.data.attributes);
+  return result;
+}
+export async function action() {}
 
 function ContactUs() {
+  const result = useLoaderData();
   return (
     <Container>
       <Typography
@@ -22,99 +37,178 @@ function ContactUs() {
         Contact us
       </Typography>
 
-      <Typography variant="h4" padding="20px 30px 10px">
-        Contact Details
-      </Typography>
-      <Grid
-        container
-        rowSpacing={1}
-        columnSpacing={{ xs: 1, sm: 2, md: 3 }}
-        justifyContent="space-evenly"
-        alignItems="stretch"
-        margin="auto"
-      >
-        <Grid item xs={12} sm={5} md={4}>
-          <Paper
-            sx={{
-              padding: "20px",
-              height: "100%",
-              width: {
-                xs: "100%",
-                sm: "auto",
-              },
-            }}
-          >
-            <Typography variant="h5">Contact Number:</Typography>
-            <Typography variant="body1" marginLeft="10px">
-              0938 906 3913
-            </Typography>
-            <Typography variant="body1" marginLeft="10px">
-              0976 166 1703
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={5} md={4}>
-          <Paper
-            sx={{
-              padding: "20px",
-              height: "100%",
-              width: {
-                xs: "100%",
-                sm: "auto",
-              },
-            }}
-          >
-            <Typography variant="h5">Email Address:</Typography>
-            <Typography variant="body1" marginLeft="10px">
-              letsgetmary@gmail.com
-            </Typography>
-          </Paper>
-        </Grid>
-        <Grid item xs={12} sm={5} md={4}>
-          <Paper
-            sx={{
-              padding: "20px",
-              height: "100%",
-              width: {
-                xs: "100%",
-                sm: "auto",
-              },
-            }}
-          >
-            <Typography variant="h5">Social Media:</Typography>
-            <Typography variant="body1" marginLeft="10px">
-              fb.com/letsgetmaryevents
-            </Typography>
-          </Paper>
-        </Grid>
-      </Grid>
-
-      <Typography variant="h4" padding="20px 30px 10px">
-        Contact Us
-      </Typography>
-
       <Box
         sx={{
           display: "flex",
+          flexDirection: {
+            xs: "column",
+            md: "row",
+          },
+          gap: "50px",
           justifyContent: "center",
-          alignItems: "center",
         }}
       >
-        <Paper
+        <Box
           sx={{
+            margin: "0 0 20px",
             width: {
               xs: "100%",
-              md: "80%",
+              md: "50%",
             },
-            minHeight: "50vh",
           }}
         >
-          <TextField label="First Name" />
-          <TextField label="Last Name" />
-          <TextField label="Email" />
-          <TextField label="Description" />
-          <Button>Submit</Button>
-        </Paper>
+          <Typography variant="body1" fontWeight="bold">
+            CONTACT DETAILS
+          </Typography>
+
+          <Typography variant="h3" fontWeight="bold">
+            Get in touch
+          </Typography>
+          <Typography variant="body2">
+            We'd love to talk about how we can help you.
+          </Typography>
+          <Box
+            style={{
+              position: "relative",
+              textAlign: "right",
+              width: "100%",
+            }}
+          >
+            <Paper
+              style={{
+                overflow: "hidden",
+                background: "none!important",
+                height: "400px",
+                margin: "20px 0",
+                borderRadius: "9px",
+              }}
+              elevation={3}
+            >
+              <iframe
+                width="100%"
+                height="100%"
+                id="gmap_canvas"
+                src="https://maps.google.com/maps?q=Let's%20Get%20MARY%20Events%20Management&t=&z=17&ie=UTF8&iwloc=&output=embed"
+                frameBorder="0"
+                scrolling="no"
+                marginHeight="0"
+                marginWidth="10px"
+              />
+              <a href="https://putlocker-is.org"></a>
+              <br />
+              <a href="https://www.embedgooglemap.net"></a>
+            </Paper>
+          </Box>
+          <Grid container columnSpacing={1}>
+            <Grid item xs={12} sm={6} sx={{ m: "10px 0" }}>
+              <Typography variant="body1" fontWeight="bold">
+                Contact Numbers:
+              </Typography>
+              <Typography variant="body1">{result.number}</Typography>
+              <Typography variant="body1">{result.number2}</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} sx={{ m: "10px 0" }}>
+              <Typography variant="body1" fontWeight="bold">
+                Email Address:
+              </Typography>
+              <Typography variant="body1">{result.email}</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} sx={{ m: "10px 0" }}>
+              <Typography variant="body1" fontWeight="bold">
+                Address:
+              </Typography>
+              <Typography variant="body1">{result.address}</Typography>
+            </Grid>
+            <Grid item xs={12} sm={6} sx={{ m: "10px 0" }}>
+              <Typography variant="body1" fontWeight="bold">
+                FB Link:
+              </Typography>
+              <Typography variant="body1">{result.facebook}</Typography>
+            </Grid>
+          </Grid>
+        </Box>
+
+        <Box sx={{ width: { xs: "100%", md: "50%" } }}>
+          <Paper
+            sx={{
+              display: "flex",
+              flexDirection: "column",
+              minHeight: "500px",
+              padding: "46px",
+              mt: "20px",
+            }}
+            elevation={10}
+          >
+            <Form style={{ width: "100%", margin: "0 0 20px" }}>
+              <Grid
+                container
+                rowSpacing={{ xs: 2, md: 3 }}
+                columnSpacing={2}
+              >
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    label="First Name"
+                    name="first-name"
+                    sx={{
+                      width: "100%",
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    label="Last Name"
+                    name="last-name"
+                    sx={{
+                      width: "100%",
+                    }}
+                  />
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    label="Email"
+                    name="email"
+                    type="email"
+                    sx={{
+                      width: "100%",
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    label="Message"
+                    name="message"
+                    type="text"
+                    multiline
+                    sx={{
+                      width: "100%",
+                      "& textarea": {
+                        height: "148px !important",
+                        overflowY: "auto !important",
+                      },
+                      "& .MuiInputBase-root": {
+                        overflowY: "auto",
+                      },
+                    }}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <Button
+                    variant="contained"
+                    sx={{ width: "100%", padding: "10px 0" }}
+                  >
+                    Submit
+                  </Button>
+                </Grid>
+              </Grid>
+            </Form>
+            <Divider />
+            <Typography variant="caption">
+              By clicking on "submit" you agree to our Privacy Policy, Data
+              Policy and Cookie Policy.
+            </Typography>
+          </Paper>
+        </Box>
       </Box>
     </Container>
   );
