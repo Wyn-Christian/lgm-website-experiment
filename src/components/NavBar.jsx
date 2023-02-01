@@ -19,7 +19,7 @@ const LinkPage = ({ title, to }) => {
 				style={{
 					textDecoration: "none",
 					color: "inherit",
-					fontSize: "22px",
+					fontSize: "28px",
 					textTransform: "capitalize",
 					fontWeight: "bold",
 				}}

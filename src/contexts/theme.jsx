@@ -21,6 +21,12 @@ let theme = createTheme({
 			disabled: "#555",
 		},
 	},
+	typography: {
+		fontFamily: ["'Ubuntu'", "cursive"].join(","),
+		p: {
+			fontWeight: 500,
+		},
+	},
 });
 
 theme = responsiveFontSizes(theme);

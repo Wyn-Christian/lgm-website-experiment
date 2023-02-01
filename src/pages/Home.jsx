@@ -24,11 +24,11 @@ function Home() {
 					<Typography variant="h2" sx={{ textAlign: "center" }}>
 						Let's Get Mary
 					</Typography>
-					<Typography sx={{ fontSize: "20px", textAlign: "justify", width: "50%", lineHeight: "30px", paddingBottom: "20px" }} mt="40px">
+					<Typography variant="p" sx={{ fontSize: "25px", textAlign: "justify", width: "50%", lineHeight: "30px", paddingBottom: "20px" }} mt="40px">
 						Let's Get Mary Events Management is opening the year of 2023 with a blast of Fresh and New Wedding Packages that will surely save some coins and treasure memories of your "once in a
 						lifetime" bridal extravaganzas!
 					</Typography>
-					<Typography sx={{ fontSize: "20px", textAlign: "justify", width: "50%", lineHeight: "30px" }}>
+					<Typography sx={{ fontSize: "25px", textAlign: "justify", width: "50%", lineHeight: "30px" }}>
 						Feel free to check and avail our wonderful wedding packages. Your in great hands our dear Future LGM couples because here in LGM "We make your once in a lifetime be memorable for a
 						lifetime".{" "}
 					</Typography>
