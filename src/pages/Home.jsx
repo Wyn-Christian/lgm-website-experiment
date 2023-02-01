@@ -20,7 +20,7 @@ function Home() {
 				<Box>
 					<img src={HomeImg} alt="Logo" style={{ width: "70%", margin: "0" }} />
 				</Box>
-				<Box sx={{ color: "#fff", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: theme.palette.primary.contrastText, padding: "80px 0" }}>
+				<Box sx={{ color: "#fff", width: "100%", display: "flex", flexDirection: "column", alignItems: "center", backgroundColor: "#5C4033", padding: "80px 0" }}>
 					<Typography variant="h2" sx={{ textAlign: "center" }}>
 						Let's Get Mary
 					</Typography>
