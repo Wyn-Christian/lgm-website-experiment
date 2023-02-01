@@ -89,7 +89,7 @@ function AboutUs() {
 					>
 						<Grid container justifyContent="space-evenly" rowSpacing={4} columnSpacing={4}>
 							<Person id={1} name="Mary Murillo" position="CEO" url="people/mary_murillo.jpg" />
-							<Person id={2} name="Princess Rebanal" position="Assintant Manager / Graphic Designer" url="people/girly_rebanal.jpg" />
+							<Person id={2} name="Princess Rebanal" position="Assistant Manager / Graphic Designer" url="people/girly_rebanal.jpg" />
 						</Grid>
 					</Box>
 				</Box>

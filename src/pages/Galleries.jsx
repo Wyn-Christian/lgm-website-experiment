@@ -50,10 +50,10 @@ function Galleries() {
 
 	return (
 		<Container>
-			<Typography variant="h1" textAlign="center" fontWeight="bold">
+			<Typography variant="h1" textAlign="center" fontWeight="bold" pt={"50px"}>
 				Gallery
 			</Typography>
-			<Typography variant="h5" textAlign="center">
+			<Typography variant="h5" textAlign="center" pb={"70px"}>
 				Browse to our collection of photos
 			</Typography>
 			{result.map((data) => (
