@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
-import { Box, Container, Paper, Typography } from "@mui/material";
+import { useState } from "react";
+import { Box, Container, Paper, Typography, Modal } from "@mui/material";
 const baseUrl = "http://localhost:1337";
 
 export async function loader() {
@@ -26,7 +27,7 @@ const packages = [
   "amor",
 ];
 
-const Package = ({ item }) => {
+const Package = ({ item, handleOpen }) => {
   return (
     <Box
       sx={{
@@ -48,6 +49,9 @@ const Package = ({ item }) => {
           src={`${baseUrl}${item.image.data.attributes.url}`}
           alt={item.title}
           style={{ width: "100%", margin: "auto" }}
+          onClick={() =>
+            handleOpen(`${baseUrl}${item.image.data.attributes.url}`)
+          }
         />
       </Paper>
     </Box>
@@ -56,6 +60,15 @@ const Package = ({ item }) => {
 
 function Packages() {
   const result = useLoaderData();
+
+  const [open, setOpen] = useState(false);
+  const [url, setUrl] = useState("");
+
+  const handleOpen = (url) => {
+    setOpen(true);
+    setUrl(url);
+  };
+  const handleClose = () => setOpen(false);
 
   return (
     <Container>
@@ -71,8 +84,33 @@ function Packages() {
         </Typography>
       </Box>
       {result.packages.map((item) => (
-        <Package item={item} key={item.id} />
+        <Package item={item} key={item.id} handleOpen={handleOpen} />
       ))}
+      <Modal open={open} onClose={handleClose}>
+        <Box
+          sx={{
+            position: "absolute",
+            top: "50%",
+            left: "50%",
+            transform: "translate(-50%, -50%)",
+            width: {
+              xs: "100%",
+              sm: "90%",
+              md: "1100px",
+              lg: "1300px",
+              xl: "1500px",
+            },
+          }}
+        >
+          <img
+            src={url}
+            alt="poppers"
+            style={{
+              width: "100%",
+            }}
+          />
+        </Box>
+      </Modal>
     </Container>
   );
 }

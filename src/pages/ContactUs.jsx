@@ -234,7 +234,12 @@ function ContactUs() {
                   <Button
                     type="submit"
                     variant="contained"
-                    sx={{ width: "100%", padding: "10px 0" }}
+                    sx={{
+                      width: "100%",
+                      padding: "10px 0",
+                      backgroundColor: "#996857",
+                      color: "white",
+                    }}
                   >
                     Submit
                   </Button>
