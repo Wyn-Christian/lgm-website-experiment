@@ -137,7 +137,13 @@ function ContactUs() {
               <Typography variant="body1" fontWeight="bold">
                 FB Link:
               </Typography>
-              <Typography variant="body1">{result.facebook}</Typography>
+              <Box
+                component="a"
+                href={`http://${result.facebook}`}
+                target="_blank"
+              >
+                <Typography variant="body1">{result.facebook}</Typography>
+              </Box>
             </Grid>
           </Grid>
         </Box>
